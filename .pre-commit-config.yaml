@@ -29,6 +29,7 @@ repos:
     rev: 3.9.2
     hooks:
     - id: flake8
+      args: [ "--ignore", "E501, W503, E402", ]
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
@@ -59,3 +60,4 @@ repos:
         args: [ --py36-plus ]
       - id: nbqa-isort
       - id: nbqa-flake8
+        args: [ "--extend-ignore=E501,W503,E402",]

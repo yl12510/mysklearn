@@ -102,6 +102,3 @@ ENV/
 
 # intelliJ
 .idea
-
-# vscode devcontainer library-scripts
-.devcontainer/library-scripts

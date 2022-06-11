@@ -42,13 +42,13 @@ repos:
     - id: isort
       args: ["--profile", "black"]
 
-  - repo: https://github.com/mwouts/jupytext
-    rev: v1.13.8  # CURRENT_TAG/COMMIT_HASH
-    hooks:
-      - id: jupytext
-        args: [ --sync, --pipe, black ]
-        additional_dependencies:
-          - black==22.3.0 # Matches hook
+#  - repo: https://github.com/mwouts/jupytext
+#    rev: v1.13.8  # CURRENT_TAG/COMMIT_HASH
+#    hooks:
+#      - id: jupytext
+#        args: [ --sync, --pipe, black ]
+#        additional_dependencies:
+#          - black==22.3.0 # Matches hook
 
   - repo: https://github.com/psf/black
     rev: 22.3.0

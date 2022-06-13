@@ -67,6 +67,56 @@ from sklearn.preprocessing import StandardScaler
 
 X = [[0, 15], [1, -10]]
 StandardScaler().fit(X).transform(X)
-# -
 
+# + [markdown] pycharm={"name": "#%% md\n"}
 # ## Pipelines: chaining pre-processors and estimators
+# - a pipeline offers the same API functions e.g. `fit` and `predict` as a regular estimator
+# - using a pipeline can prevent from disclosing testing data in training data (i.e. data leakage)
+
+# + pycharm={"name": "#%%\n"}
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+
+# + pycharm={"name": "#%%\n"}
+from sklearn.preprocessing import StandardScaler
+
+# create a pipeline object
+pipe = make_pipeline(StandardScaler(), LogisticRegression())
+
+# load the iris dataset and split into train and test sets
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# fit the whole pipeline
+pipe.fit(X_train, y_train)
+
+# use it to predict over test data set and calculate accuracy score
+accuracy_score(pipe.predict(X_test), y_test)
+
+# + [markdown] pycharm={"name": "#%% md\n"}
+# ## Model evaluation
+#
+# A model needs to be evaluated to see if it can predict well over unseen data.
+# - Cross validation is a particular tool for model evaluation
+# - sklearn provides a `cross_validate` helper, which by default will perform a 5-fold cross validation
+# - it is also possible to do manual iteration over folds, use different data splitting strategies, and use custom scoring functions
+
+# + pycharm={"name": "#%%\n"}
+from sklearn.datasets import make_regression
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import cross_validate
+
+X, y = make_regression(n_samples=1000, random_state=0)
+lr = LinearRegression()
+
+result = cross_validate(lr, X, y)
+result
+
+# + [markdown] pycharm={"name": "#%% md\n"}
+# ## Automatic parameter searches
+
+# + [markdown] pycharm={"name": "#%% md\n"}
+#

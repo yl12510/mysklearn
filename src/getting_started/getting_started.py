@@ -117,6 +117,35 @@ result
 
 # + [markdown] pycharm={"name": "#%% md\n"}
 # ## Automatic parameter searches
-
-# + [markdown] pycharm={"name": "#%% md\n"}
 #
+# How good the generalisation of an estimator highly depends on a number of parameters (or hyper-parameters).
+# - sklearn provides tools to automatically search the parameter space and find the best combination.
+
+# + pycharm={"name": "#%%\n"}
+from scipy.stats import randint
+from sklearn.datasets import fetch_california_housing
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
+
+X, y = fetch_california_housing(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+# define the parameter space to search over
+param_spaces = {"n_estimators": randint(1, 5), "max_depth": randint(5, 10)}
+
+# create a searchCV object and fit it to the data
+search = RandomizedSearchCV(
+    estimator=RandomForestRegressor(random_state=0),
+    n_iter=5,
+    param_distributions=param_spaces,
+    random_state=0,
+)
+
+search.fit(X_train, y_train)
+
+search.best_params_
+
+# + pycharm={"name": "#%%\n"}
+search.score(X_test, y_test)
+
+# + pycharm={"name": "#%%\n"}

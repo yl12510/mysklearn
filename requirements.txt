@@ -1,4 +1,3 @@
 jupytext
 pre-commit
 scikit-learn
-scipy

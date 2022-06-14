@@ -4,6 +4,14 @@ exclude: >
       tests/notebooks/.*|
     )$
 repos:
+#  - repo: https://github.com/mwouts/jupytext
+#    rev: v1.13.8  # CURRENT_TAG/COMMIT_HASH
+#    hooks:
+#      - id: jupytext
+#        args: [ --sync, --pipe, black ]
+#        additional_dependencies:
+#          - black==22.3.0 # Matches hook
+
   - repo: https://gitlab.com/bmares/check-json5
     rev: v1.0.0
     hooks:
@@ -41,14 +49,6 @@ repos:
       # See https://github.com/PyCQA/isort/issues/1518
     - id: isort
       args: ["--profile", "black"]
-
-  - repo: https://github.com/mwouts/jupytext
-    rev: v1.13.8  # CURRENT_TAG/COMMIT_HASH
-    hooks:
-      - id: jupytext
-        args: [ --sync, --pipe, black ]
-        additional_dependencies:
-          - black==22.3.0 # Matches hook
 
   - repo: https://github.com/psf/black
     rev: 22.3.0
